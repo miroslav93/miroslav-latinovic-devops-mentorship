@@ -9,23 +9,3 @@ exec 8>$tempfile2
 echo "Sending data to directory $tempdir"
 echo "This is a test line of data for $tempfile1" >&7
 echo "This is a test line of data for $tempfile2" >&8
-$ ./test21
-Sending data to directory dir.ouT8S8
-$ ls -al
-total 72
-drwxr-xr-x 3 rich rich 4096 Oct 17 22:20 ./
-drwxr-xr-x 9 rich rich 4096 Oct 17 09:44 ../
-drwx------ 2 rich rich 4096 Oct 17 22:20 dir.ouT8S8/
--rwxr--r-- 1 rich rich 338 Oct 17 22:20 test21*
-$ cd dir.ouT8S8
-[dir.ouT8S8]$ ls -al
-total 16
-drwx------ 2 rich rich 4096 Oct 17 22:20 ./
-drwxr-xr-x 3 rich rich 4096 Oct 17 22:20 ../
--rw------- 1 rich rich 44 Oct 17 22:20 temp.N5F3O6
--rw------- 1 rich rich 44 Oct 17 22:20 temp.SQslb7
-[dir.ouT8S8]$ cat temp.N5F3O6
-This is a test line of data for temp.N5F3O6
-[dir.ouT8S8]$ cat temp.SQslb7
-This is a test line of data for temp.SQslb7
-[dir.ouT8S8]$
