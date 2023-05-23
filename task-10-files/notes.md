@@ -159,3 +159,49 @@
 - A Publisher sends messages to a topic
 - Topics can have subscribers which receive messages
 - e.g. HTTP(s), Email(-JSON), SQS, Mobile Push, SMS Messages and Lambda
+
+## Simple Queue Service
+- Service that provides managed message queues
+- Public, fully-managed, highly-available queues - Standard or FIFO
+- FIFO queues guarantee an order - messages are ordered in the way they are received
+- Standard queue - best effort ordering
+- SQS messages can be up to 256KB in size
+- Clients send messages to queue and other clients can poll the messages
+- When messages are polled, they are not deleted, but instead hidden for a time (VisibilityTimeout)
+- After the timeout, the message either reappears (retries), or is explicity deleted
+- Dead-Letter Queue can be used for problem message (example: message received 5 or more times but never deleted)
+- ASGs can scale based on queue length and Lambdas can be triggered by queue messages
+- Standard queue - multi-lane highway, FIFO - single-lane road with no opportunity to overtake
+- Standard - at-least-once, FIFO - exactly-once
+- FIFO (Performance) - 3000 messages per second with batching, or up to 300 messages per second without
+- Billed based on 'requests'
+- 1 request = 1-10 messages up to 64KB total
+- Two ways to poll SQS: 
+    1. Short (immediate) 
+        - uses 1 request
+        - can receive 0 or more messages
+        - if the queue has 0 messages, it still consumes a request and immediately returns 0 messages
+    2. Long (waitTimeSeconds)
+        - can specify a waitTimeSeconds (up to 20 seconds)
+        - will wait for messages to arrive
+        - recommended to use - uses fewer request
+- SQS supports encryption at rest (KMS) and in-transit
+- Queue policy is used to manage access
+
+## SQS Standard vs FIFO Queues
+1. Standard
+    - Scalable - as wide as required, near unlimited TPS
+    - At-Least-Once-Delivery, there could, on occassion, be more than one copy of a message
+    - Best-Effort Ordering - no rigid preservation of message order
+2. FIFO
+    - 300 TPS without Batching, 3,000 with
+    - Must have a .fifo suffix
+    - Exactly-Once processing, duplicates are removed
+    - Message order is strictly preserved, First In First Out
+
+## SQS Delay Queues
+- Delay queues allow us to postpone delivery of messages to consumers
+- Visibility timeout - any further message polls after a message is sent return no result, after a certain configurable duration, message will reappear in queue and can be processed again - used for error correction and automatic processing
+- Delay Queue - we can configure a 'DelaySeconds' value - Messages added to the queue will be Invisible for DelaySeconds
+- DelaySeconds - minimum is 0, maximum is 15 minutes
+- Per-message timeout - 0, maximum is 15 minutes, cannot be used with FIFO
