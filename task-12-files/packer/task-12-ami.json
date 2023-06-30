@@ -1,0 +1,15 @@
+{
+    "builders": [{
+        "type": "amazon-ebs",
+        "region": "eu-central-1",
+        "source_ami": "ami-0749e2c902c836c08",
+        "instance_type": "t2.micro",
+        "ssh_username": "ec2-user",
+        "temporary_key_pair_type": "ed25519",
+        "ami_name": "task-12-ami {{timestamp}}"
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "script": "./scripts/installnginx.sh"
+    }]
+}
