@@ -1,0 +1,26 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+      "Task12WebServerCf": {
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "ImageId": "ami-07c6322fcdbe32922",
+          "InstanceType": "t2.micro",
+          "KeyName": "miroslav-latinovic-web-server-key",
+          "SecurityGroupIds": ["sg-080e0a51e5dfa3657"], 
+          "SubnetId": "subnet-0598fd94364953bdf"
+        }
+      },
+      "Task12WebServerCf2": {
+        "Type": "AWS::EC2::Instance",
+        "Properties": {
+          "ImageId": "ami-07c6322fcdbe32922",
+          "InstanceType": "t2.micro",
+          "KeyName": "miroslav-latinovic-web-server-key",
+          "SecurityGroupIds": ["sg-080e0a51e5dfa3657"], 
+          "SubnetId": "subnet-0598fd94364953bdf"
+        }
+      }
+    }
+  }
+  

@@ -1,1 +1,5 @@
 basefile.txt
+./task-12-files/tf/.terraform
+./task-12-files/tf/terraform.tfstate
+./task-12-files/tf/terraform.tfstate.backup
+./task-12-files/tf//terraform.lock.hcl
